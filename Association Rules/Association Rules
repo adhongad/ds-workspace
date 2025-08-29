@@ -1,0 +1,604 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "80765201-ae3a-4b02-bf0f-7c10e07a9a75",
+   "metadata": {},
+   "source": [
+    "Step 1: Load and Explore the Dataset"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "a82e920b-e02f-49e5-bb7b-088c031daa4a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "  shrimp,almonds,avocado,vegetables mix,green grapes,whole weat flour,yams,cottage cheese,energy drink,tomato juice,low fat yogurt,green tea,honey,salad,mineral water,salmon,antioxydant juice,frozen smoothie,spinach,olive oil\n",
+      "0                             burgers,meatballs,eggs                                                                                                                                                                             \n",
+      "1                                            chutney                                                                                                                                                                             \n",
+      "2                                     turkey,avocado                                                                                                                                                                             \n",
+      "3  mineral water,milk,energy bar,whole wheat rice...                                                                                                                                                                             \n",
+      "4                                     low fat yogurt                                                                                                                                                                             \n",
+      "<class 'pandas.core.frame.DataFrame'>\n",
+      "RangeIndex: 7500 entries, 0 to 7499\n",
+      "Data columns (total 1 columns):\n",
+      " #   Column                                                                                                                                                                                                                           Non-Null Count  Dtype \n",
+      "---  ------                                                                                                                                                                                                                           --------------  ----- \n",
+      " 0   shrimp,almonds,avocado,vegetables mix,green grapes,whole weat flour,yams,cottage cheese,energy drink,tomato juice,low fat yogurt,green tea,honey,salad,mineral water,salmon,antioxydant juice,frozen smoothie,spinach,olive oil  7500 non-null   object\n",
+      "dtypes: object(1)\n",
+      "memory usage: 58.7+ KB\n",
+      "None\n",
+      "       shrimp,almonds,avocado,vegetables mix,green grapes,whole weat flour,yams,cottage cheese,energy drink,tomato juice,low fat yogurt,green tea,honey,salad,mineral water,salmon,antioxydant juice,frozen smoothie,spinach,olive oil\n",
+      "count                                                7500                                                                                                                                                                             \n",
+      "unique                                               5175                                                                                                                                                                             \n",
+      "top                                               cookies                                                                                                                                                                             \n",
+      "freq                                                  223                                                                                                                                                                             \n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "# Load dataset\n",
+    "data = pd.read_excel(\"Online Retail.xlsx\")\n",
+    "\n",
+    "# Overview\n",
+    "print(data.head())\n",
+    "print(data.info())\n",
+    "print(data.describe())\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "723031b2-f92a-4b38-b9e4-da108af25fef",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Step 2: Data Preprocessing"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "e8f10e02-d0f0-427f-9810-288479fba7fc",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "KeyError",
+     "evalue": "['InvoiceNo', 'StockCode', 'Description']",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mKeyError\u001b[0m                                  Traceback (most recent call last)",
+      "\u001b[1;32m~\\AppData\\Local\\Temp\\ipykernel_25696\\4255328158.py\u001b[0m in \u001b[0;36m?\u001b[1;34m()\u001b[0m\n\u001b[0;32m      1\u001b[0m \u001b[1;31m# Drop rows with missing InvoiceNo, StockCode, or Description\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[1;32m----> 2\u001b[1;33m \u001b[0mdata\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mdata\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mdropna\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0msubset\u001b[0m\u001b[1;33m=\u001b[0m\u001b[1;33m[\u001b[0m\u001b[1;34m'InvoiceNo'\u001b[0m\u001b[1;33m,\u001b[0m \u001b[1;34m'StockCode'\u001b[0m\u001b[1;33m,\u001b[0m \u001b[1;34m'Description'\u001b[0m\u001b[1;33m]\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0m\u001b[0;32m      3\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m      4\u001b[0m \u001b[1;31m# Remove duplicates\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m      5\u001b[0m \u001b[0mdata\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mdata\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mdrop_duplicates\u001b[0m\u001b[1;33m(\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n",
+      "\u001b[1;32m~\\anaconda3\\Lib\\site-packages\\pandas\\core\\frame.py\u001b[0m in \u001b[0;36m?\u001b[1;34m(self, axis, how, thresh, subset, inplace, ignore_index)\u001b[0m\n\u001b[0;32m   6666\u001b[0m             \u001b[0max\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mself\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0m_get_axis\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0magg_axis\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m   6667\u001b[0m             \u001b[0mindices\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0max\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mget_indexer_for\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0msubset\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m   6668\u001b[0m             \u001b[0mcheck\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mindices\u001b[0m \u001b[1;33m==\u001b[0m \u001b[1;33m-\u001b[0m\u001b[1;36m1\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m   6669\u001b[0m             \u001b[1;32mif\u001b[0m \u001b[0mcheck\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0many\u001b[0m\u001b[1;33m(\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m:\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[1;32m-> 6670\u001b[1;33m                 \u001b[1;32mraise\u001b[0m \u001b[0mKeyError\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0mnp\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0marray\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0msubset\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m[\u001b[0m\u001b[0mcheck\u001b[0m\u001b[1;33m]\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mtolist\u001b[0m\u001b[1;33m(\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0m\u001b[0;32m   6671\u001b[0m             \u001b[0magg_obj\u001b[0m \u001b[1;33m=\u001b[0m \u001b[0mself\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mtake\u001b[0m\u001b[1;33m(\u001b[0m\u001b[0mindices\u001b[0m\u001b[1;33m,\u001b[0m \u001b[0maxis\u001b[0m\u001b[1;33m=\u001b[0m\u001b[0magg_axis\u001b[0m\u001b[1;33m)\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m   6672\u001b[0m \u001b[1;33m\u001b[0m\u001b[0m\n\u001b[0;32m   6673\u001b[0m         \u001b[1;32mif\u001b[0m \u001b[0mthresh\u001b[0m \u001b[1;32mis\u001b[0m \u001b[1;32mnot\u001b[0m \u001b[0mlib\u001b[0m\u001b[1;33m.\u001b[0m\u001b[0mno_default\u001b[0m\u001b[1;33m:\u001b[0m\u001b[1;33m\u001b[0m\u001b[1;33m\u001b[0m\u001b[0m\n",
+      "\u001b[1;31mKeyError\u001b[0m: ['InvoiceNo', 'StockCode', 'Description']"
+     ]
+    }
+   ],
+   "source": [
+    "# Drop rows with missing InvoiceNo, StockCode, or Description\n",
+    "data = data.dropna(subset=['InvoiceNo', 'StockCode', 'Description'])\n",
+    "\n",
+    "# Remove duplicates\n",
+    "data = data.drop_duplicates()\n",
+    "\n",
+    "# Keep only positive quantities\n",
+    "data = data[data['Quantity'] > 0]\n",
+    "\n",
+    "# Convert InvoiceNo and StockCode to string\n",
+    "data['InvoiceNo'] = data['InvoiceNo'].astype(str)\n",
+    "data['StockCode'] = data['StockCode'].astype(str)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "325513a2-79ec-4770-be47-48799c1c2d9c",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Index(['shrimp,almonds,avocado,vegetables mix,green grapes,whole weat flour,yams,cottage cheese,energy drink,tomato juice,low fat yogurt,green tea,honey,salad,mineral water,salmon,antioxydant juice,frozen smoothie,spinach,olive oil'], dtype='object')\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(data.columns)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "id": "2bbf1642-944c-4b59-ac41-e781c5c774df",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "  shrimp,almonds,avocado,vegetables mix,green grapes,whole weat flour,yams,cottage cheese,energy drink,tomato juice,low fat yogurt,green tea,honey,salad,mineral water,salmon,antioxydant juice,frozen smoothie,spinach,olive oil\n",
+      "0                             burgers,meatballs,eggs                                                                                                                                                                             \n",
+      "1                                            chutney                                                                                                                                                                             \n",
+      "2                                     turkey,avocado                                                                                                                                                                             \n",
+      "3  mineral water,milk,energy bar,whole wheat rice...                                                                                                                                                                             \n",
+      "4                                     low fat yogurt                                                                                                                                                                             \n",
+      "['burgers', 'meatballs', 'eggs']\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "# Load data\n",
+    "data = pd.read_excel(\"Online Retail.xlsx\")\n",
+    "\n",
+    "# Check first few rows\n",
+    "print(data.head())\n",
+    "\n",
+    "# Split items into lists\n",
+    "transactions = data.iloc[:,0].apply(lambda x: x.split(','))\n",
+    "\n",
+    "# Display first transaction\n",
+    "print(transactions[0])\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "c4181241-c5de-49ef-a7bb-3e638dd8745f",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Step 2: Convert to One-Hot Encoding"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "65d995d0-2d01-41ad-b7d3-d76a714aab23",
+   "metadata": {},
+   "source": [
+    "We need a binary matrix: each column is an item, rows are transactions (1 if purchased, 0 otherwise)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "efe1daf1-134b-4a1e-a60c-54b15656e87c",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "ModuleNotFoundError",
+     "evalue": "No module named 'mlxtend'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[16], line 1\u001b[0m\n\u001b[1;32m----> 1\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mmlxtend\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mpreprocessing\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m TransactionEncoder\n\u001b[0;32m      3\u001b[0m te \u001b[38;5;241m=\u001b[39m TransactionEncoder()\n\u001b[0;32m      4\u001b[0m te_ary \u001b[38;5;241m=\u001b[39m te\u001b[38;5;241m.\u001b[39mfit(transactions)\u001b[38;5;241m.\u001b[39mtransform(transactions)\n",
+      "\u001b[1;31mModuleNotFoundError\u001b[0m: No module named 'mlxtend'"
+     ]
+    }
+   ],
+   "source": [
+    "from mlxtend.preprocessing import TransactionEncoder\n",
+    "\n",
+    "te = TransactionEncoder()\n",
+    "te_ary = te.fit(transactions).transform(transactions)\n",
+    "basket_sets = pd.DataFrame(te_ary, columns=te.columns_)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "ba20d04e-62a0-43c4-861a-25f5d1931d9a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Collecting mlxtend\n",
+      "  Downloading mlxtend-0.23.4-py3-none-any.whl.metadata (7.3 kB)\n",
+      "Requirement already satisfied: scipy>=1.2.1 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from mlxtend) (1.13.1)\n",
+      "Requirement already satisfied: numpy>=1.16.2 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from mlxtend) (1.26.4)\n",
+      "Requirement already satisfied: pandas>=0.24.2 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from mlxtend) (2.2.2)\n",
+      "Requirement already satisfied: scikit-learn>=1.3.1 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from mlxtend) (1.5.1)\n",
+      "Requirement already satisfied: matplotlib>=3.0.0 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from mlxtend) (3.9.2)\n",
+      "Requirement already satisfied: joblib>=0.13.2 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from mlxtend) (1.4.2)\n",
+      "Requirement already satisfied: contourpy>=1.0.1 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from matplotlib>=3.0.0->mlxtend) (1.2.0)\n",
+      "Requirement already satisfied: cycler>=0.10 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from matplotlib>=3.0.0->mlxtend) (0.11.0)\n",
+      "Requirement already satisfied: fonttools>=4.22.0 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from matplotlib>=3.0.0->mlxtend) (4.51.0)\n",
+      "Requirement already satisfied: kiwisolver>=1.3.1 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from matplotlib>=3.0.0->mlxtend) (1.4.4)\n",
+      "Requirement already satisfied: packaging>=20.0 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from matplotlib>=3.0.0->mlxtend) (24.1)\n",
+      "Requirement already satisfied: pillow>=8 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from matplotlib>=3.0.0->mlxtend) (10.4.0)\n",
+      "Requirement already satisfied: pyparsing>=2.3.1 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from matplotlib>=3.0.0->mlxtend) (3.1.2)\n",
+      "Requirement already satisfied: python-dateutil>=2.7 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from matplotlib>=3.0.0->mlxtend) (2.9.0.post0)\n",
+      "Requirement already satisfied: pytz>=2020.1 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from pandas>=0.24.2->mlxtend) (2024.1)\n",
+      "Requirement already satisfied: tzdata>=2022.7 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from pandas>=0.24.2->mlxtend) (2023.3)\n",
+      "Requirement already satisfied: threadpoolctl>=3.1.0 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from scikit-learn>=1.3.1->mlxtend) (3.5.0)\n",
+      "Requirement already satisfied: six>=1.5 in c:\\users\\anjali\\anaconda3\\lib\\site-packages (from python-dateutil>=2.7->matplotlib>=3.0.0->mlxtend) (1.16.0)\n",
+      "Downloading mlxtend-0.23.4-py3-none-any.whl (1.4 MB)\n",
+      "   ---------------------------------------- 0.0/1.4 MB ? eta -:--:--\n",
+      "   ---------------------------------------- 0.0/1.4 MB ? eta -:--:--\n",
+      "   ---------------------------------------- 0.0/1.4 MB ? eta -:--:--\n",
+      "   ---------------------------------------- 0.0/1.4 MB ? eta -:--:--\n",
+      "   ---------------------------------------- 0.0/1.4 MB ? eta -:--:--\n",
+      "   ------- -------------------------------- 0.3/1.4 MB ? eta -:--:--\n",
+      "   --------------- ------------------------ 0.5/1.4 MB 799.2 kB/s eta 0:00:02\n",
+      "   --------------- ------------------------ 0.5/1.4 MB 799.2 kB/s eta 0:00:02\n",
+      "   --------------- ------------------------ 0.5/1.4 MB 799.2 kB/s eta 0:00:02\n",
+      "   ----------------------- ---------------- 0.8/1.4 MB 644.9 kB/s eta 0:00:01\n",
+      "   ----------------------- ---------------- 0.8/1.4 MB 644.9 kB/s eta 0:00:01\n",
+      "   ----------------------- ---------------- 0.8/1.4 MB 644.9 kB/s eta 0:00:01\n",
+      "   ----------------------- ---------------- 0.8/1.4 MB 644.9 kB/s eta 0:00:01\n",
+      "   ----------------------- ---------------- 0.8/1.4 MB 644.9 kB/s eta 0:00:01\n",
+      "   ----------------------- ---------------- 0.8/1.4 MB 644.9 kB/s eta 0:00:01\n",
+      "   ----------------------- ---------------- 0.8/1.4 MB 644.9 kB/s eta 0:00:01\n",
+      "   ------------------------------- -------- 1.0/1.4 MB 344.8 kB/s eta 0:00:01\n",
+      "   ------------------------------- -------- 1.0/1.4 MB 344.8 kB/s eta 0:00:01\n",
+      "   ------------------------------- -------- 1.0/1.4 MB 344.8 kB/s eta 0:00:01\n",
+      "   ---------------------------------------- 1.4/1.4 MB 355.9 kB/s eta 0:00:00\n",
+      "Installing collected packages: mlxtend\n",
+      "Successfully installed mlxtend-0.23.4\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install mlxtend\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "a465da0b-a271-4579-ba7c-629ea7f78411",
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "NameError",
+     "evalue": "name 'transactions' is not defined",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[1;31mNameError\u001b[0m                                 Traceback (most recent call last)",
+      "Cell \u001b[1;32mIn[5], line 4\u001b[0m\n\u001b[0;32m      1\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m \u001b[38;5;21;01mmlxtend\u001b[39;00m\u001b[38;5;21;01m.\u001b[39;00m\u001b[38;5;21;01mpreprocessing\u001b[39;00m \u001b[38;5;28;01mimport\u001b[39;00m TransactionEncoder\n\u001b[0;32m      3\u001b[0m te \u001b[38;5;241m=\u001b[39m TransactionEncoder()\n\u001b[1;32m----> 4\u001b[0m te_ary \u001b[38;5;241m=\u001b[39m te\u001b[38;5;241m.\u001b[39mfit(transactions)\u001b[38;5;241m.\u001b[39mtransform(transactions)\n\u001b[0;32m      5\u001b[0m basket_sets \u001b[38;5;241m=\u001b[39m pd\u001b[38;5;241m.\u001b[39mDataFrame(te_ary, columns\u001b[38;5;241m=\u001b[39mte\u001b[38;5;241m.\u001b[39mcolumns_)\n",
+      "\u001b[1;31mNameError\u001b[0m: name 'transactions' is not defined"
+     ]
+    }
+   ],
+   "source": [
+    "from mlxtend.preprocessing import TransactionEncoder\n",
+    "\n",
+    "te = TransactionEncoder()\n",
+    "te_ary = te.fit(transactions).transform(transactions)\n",
+    "basket_sets = pd.DataFrame(te_ary, columns=te.columns_)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "dc2c80c0-aa1d-46f1-95ff-7ae4cd889b8e",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "  shrimp,almonds,avocado,vegetables mix,green grapes,whole weat flour,yams,cottage cheese,energy drink,tomato juice,low fat yogurt,green tea,honey,salad,mineral water,salmon,antioxydant juice,frozen smoothie,spinach,olive oil\n",
+      "0                             burgers,meatballs,eggs                                                                                                                                                                             \n",
+      "1                                            chutney                                                                                                                                                                             \n",
+      "2                                     turkey,avocado                                                                                                                                                                             \n",
+      "3  mineral water,milk,energy bar,whole wheat rice...                                                                                                                                                                             \n",
+      "4                                     low fat yogurt                                                                                                                                                                             \n",
+      "['burgers', 'meatballs', 'eggs']\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "\n",
+    "# Load your Excel file\n",
+    "data = pd.read_excel(\"Online Retail.xlsx\")\n",
+    "\n",
+    "# Check the first few rows\n",
+    "print(data.head())\n",
+    "\n",
+    "# Create list of transactions (split items by comma)\n",
+    "transactions = data.iloc[:,0].apply(lambda x: x.split(','))\n",
+    "\n",
+    "# Check first transaction\n",
+    "print(transactions[0])\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "id": "1e8c1644-8b7e-402f-80b6-e8933ec7de8c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from mlxtend.preprocessing import TransactionEncoder\n",
+    "\n",
+    "te = TransactionEncoder()\n",
+    "te_ary = te.fit(transactions).transform(transactions)\n",
+    "basket_sets = pd.DataFrame(te_ary, columns=te.columns_)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "eb42f9fa-7fc5-4555-b0e7-07c332c52b0c",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Step 3.1: Generate Frequent Itemsets"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "id": "412ef8ae-b7db-4a65-8443-47546c72107f",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "    support     itemsets\n",
+      "0  0.020267    (almonds)\n",
+      "1  0.033200    (avocado)\n",
+      "2  0.033733   (brownies)\n",
+      "3  0.087200    (burgers)\n",
+      "4  0.030133     (butter)\n",
+      "5  0.081067       (cake)\n",
+      "6  0.025733    (cereals)\n",
+      "7  0.046800  (champagne)\n",
+      "8  0.060000    (chicken)\n",
+      "9  0.163867  (chocolate)\n"
+     ]
+    }
+   ],
+   "source": [
+    "from mlxtend.frequent_patterns import apriori\n",
+    "\n",
+    "# Generate frequent itemsets (e.g., min_support = 0.02)\n",
+    "frequent_itemsets = apriori(basket_sets, min_support=0.02, use_colnames=True)\n",
+    "\n",
+    "# Check top 10 frequent itemsets\n",
+    "print(frequent_itemsets.head(10))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "id": "6a3dfc96-941a-46e6-9117-e10c41b072bf",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Step 3.2: Generate Association Rules"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "1f7f29a3-baad-437b-8306-c261e8897ecd",
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "            antecedents          consequents  antecedent support  \\\n",
+      "47        (ground beef)          (spaghetti)            0.098267   \n",
+      "46          (spaghetti)        (ground beef)            0.174133   \n",
+      "69          (spaghetti)          (olive oil)            0.174133   \n",
+      "68          (olive oil)          (spaghetti)            0.065733   \n",
+      "61               (soup)      (mineral water)            0.050533   \n",
+      "60      (mineral water)               (soup)            0.238267   \n",
+      "36  (frozen vegetables)               (milk)            0.095333   \n",
+      "37               (milk)  (frozen vegetables)            0.129600   \n",
+      "0             (burgers)               (eggs)            0.087200   \n",
+      "1                (eggs)            (burgers)            0.179733   \n",
+      "\n",
+      "    consequent support   support  confidence      lift  representativity  \\\n",
+      "47            0.174133  0.039200    0.398915  2.290857               1.0   \n",
+      "46            0.098267  0.039200    0.225115  2.290857               1.0   \n",
+      "69            0.065733  0.022933    0.131700  2.003547               1.0   \n",
+      "68            0.174133  0.022933    0.348884  2.003547               1.0   \n",
+      "61            0.238267  0.023067    0.456464  1.915771               1.0   \n",
+      "60            0.050533  0.023067    0.096810  1.915771               1.0   \n",
+      "36            0.129600  0.023600    0.247552  1.910127               1.0   \n",
+      "37            0.095333  0.023600    0.182099  1.910127               1.0   \n",
+      "0             0.179733  0.028800    0.330275  1.837585               1.0   \n",
+      "1             0.087200  0.028800    0.160237  1.837585               1.0   \n",
+      "\n",
+      "    leverage  conviction  zhangs_metric   jaccard  certainty  kulczynski  \n",
+      "47  0.022088    1.373959       0.624888  0.168096   0.272176    0.312015  \n",
+      "46  0.022088    1.163699       0.682292  0.168096   0.140672    0.312015  \n",
+      "69  0.011487    1.075972       0.606497  0.105716   0.070608    0.240292  \n",
+      "68  0.011487    1.268387       0.536127  0.105716   0.211597    0.240292  \n",
+      "61  0.011026    1.401441       0.503458  0.086804   0.286449    0.276637  \n",
+      "60  0.011026    1.051237       0.627538  0.086804   0.048740    0.276637  \n",
+      "36  0.011245    1.156758       0.526685  0.117219   0.135515    0.214826  \n",
+      "37  0.011245    1.106083       0.547420  0.117219   0.095909    0.214826  \n",
+      "0   0.013127    1.224782       0.499351  0.120941   0.183528    0.245256  \n",
+      "1   0.013127    1.086974       0.555682  0.120941   0.080015    0.245256  \n"
+     ]
+    }
+   ],
+   "source": [
+    "from mlxtend.frequent_patterns import association_rules\n",
+    "\n",
+    "# Generate rules with lift >= 1.2\n",
+    "rules = association_rules(frequent_itemsets, metric=\"lift\", min_threshold=1.2)\n",
+    "\n",
+    "# Sort rules by lift\n",
+    "rules = rules.sort_values('lift', ascending=False)\n",
+    "\n",
+    "# Display top 10 rules\n",
+    "print(rules.head(10))\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "07801f79-9683-4492-8c88-28de0242832f",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Step 3.3: Example Interpretation\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "2da57f53-4dd1-4877-8bcb-79834a06faf3",
+   "metadata": {},
+   "source": [
+    "Look at top rules (highest lift) → products frequently bought together.\n",
+    "\n",
+    "Example insights:\n",
+    "\n",
+    "“Customers buying mineral water also buy salad.”\n",
+    "\n",
+    "“Tea and biscuits are often purchased together.”"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "id": "b38846fe-33a8-4437-9311-c8bf697b48dc",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Step 4.1: Examine Top Rules"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "id": "d300faed-4375-48b3-bbb5-d190c79f3a7b",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "            antecedents          consequents   support  confidence      lift\n",
+      "47        (ground beef)          (spaghetti)  0.039200    0.398915  2.290857\n",
+      "46          (spaghetti)        (ground beef)  0.039200    0.225115  2.290857\n",
+      "69          (spaghetti)          (olive oil)  0.022933    0.131700  2.003547\n",
+      "68          (olive oil)          (spaghetti)  0.022933    0.348884  2.003547\n",
+      "61               (soup)      (mineral water)  0.023067    0.456464  1.915771\n",
+      "60      (mineral water)               (soup)  0.023067    0.096810  1.915771\n",
+      "36  (frozen vegetables)               (milk)  0.023600    0.247552  1.910127\n",
+      "37               (milk)  (frozen vegetables)  0.023600    0.182099  1.910127\n",
+      "0             (burgers)               (eggs)  0.028800    0.330275  1.837585\n",
+      "1                (eggs)            (burgers)  0.028800    0.160237  1.837585\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Show top 10 rules by lift\n",
+    "top_rules = rules.head(10)\n",
+    "print(top_rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']])\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "id": "937f9531-af3d-4abd-936d-138e59533d82",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Step 4.2: Identify Patterns\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "a8f08fac-06d4-4366-a8f7-5f6a0e11bc9a",
+   "metadata": {},
+   "source": [
+    "Look for common item combinations.\n",
+    "\n",
+    "Example insights:\n",
+    "\n",
+    "Mineral water & salad → healthy choice combo.\n",
+    "\n",
+    "Whole wheat flour & honey → baking ingredients often purchased together.\n",
+    "\n",
+    "Energy drink & frozen smoothie → fitness-related products."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "id": "5547fbb1-50ca-4d8b-ba24-55c7ce6059b3",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#Step 4.3: Business Implications\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "4820e003-f006-45a8-bb5d-408a4ebde7d0",
+   "metadata": {},
+   "source": [
+    "Cross-selling & promotions: Place frequently bought-together items near each other or create combo offers.\n",
+    "\n",
+    "Inventory management: Stock associated products together to avoid shortages.\n",
+    "\n",
+    "Personalized recommendations: Suggest items based on past purchase patterns.\n",
+    "\n",
+    "✅ Summary\n",
+    "\n",
+    "Top rules are selected using support, confidence, and lift.\n",
+    "\n",
+    "Lift helps identify truly strong associations beyond chance.\n",
+    "\n",
+    "Patterns reveal customer purchasing behavior."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "9b85a177-e210-4a36-a9c0-a8ab47dc1fee",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python [conda env:base] *",
+   "language": "python",
+   "name": "conda-base-py"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.12.7"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

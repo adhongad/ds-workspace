@@ -1,0 +1,104 @@
+support,itemsets
+0.23836821757099053,frozenset({'mineral water'})
+0.17970937208372217,frozenset({'eggs'})
+0.17411011865084655,frozenset({'spaghetti'})
+0.1709105452606319,frozenset({'french fries'})
+0.1638448206905746,frozenset({'chocolate'})
+0.13211571790427942,frozenset({'green tea'})
+0.12958272230369283,frozenset({'milk'})
+0.09825356619117451,frozenset({'ground beef'})
+0.09532062391681109,frozenset({'frozen vegetables'})
+0.09505399280095987,frozenset({'pancakes'})
+0.0871883748833489,frozenset({'burgers'})
+0.08105585921877083,frozenset({'cake'})
+0.08038928142914278,frozenset({'cookies'})
+0.0793227569657379,frozenset({'escalope'})
+0.07652313024930009,frozenset({'low fat yogurt'})
+0.07145713904812692,frozenset({'shrimp'})
+0.06839088121583789,frozenset({'tomatoes'})
+0.0658578856152513,frozenset({'olive oil'})
+0.06332489001466471,frozenset({'frozen smoothie'})
+0.06252499666711105,frozenset({'turkey'})
+0.05999200106652446,frozenset({'chicken'})
+0.05972536995067324,"frozenset({'spaghetti', 'mineral water'})"
+0.058525529929342755,frozenset({'whole wheat rice'})
+0.05265964538061592,"frozenset({'chocolate', 'mineral water'})"
+0.0523930142647647,frozenset({'grated cheese'})
+0.0510598586855086,frozenset({'cooking oil'})
+0.05092654312758299,"frozenset({'eggs', 'mineral water'})"
+0.05052659645380616,frozenset({'soup'})
+0.04946007199040128,frozenset({'herb & pepper'})
+0.04799360085321957,"frozenset({'milk', 'mineral water'})"
+0.047460338621517134,frozenset({'honey'})
+0.04679376083188908,frozenset({'champagne'})
+0.043060925209972005,frozenset({'fresh bread'})
+0.04252766297826956,frozenset({'salmon'})
+0.040927876283162246,"frozenset({'ground beef', 'mineral water'})"
+0.03919477403012932,"frozenset({'ground beef', 'spaghetti'})"
+0.03919477403012932,"frozenset({'spaghetti', 'chocolate'})"
+0.036528462871617116,"frozenset({'eggs', 'spaghetti'})"
+0.036395147313691506,"frozenset({'eggs', 'french fries'})"
+0.03572856952406346,"frozenset({'mineral water', 'frozen vegetables'})"
+0.03546193840821224,"frozenset({'milk', 'spaghetti'})"
+0.03439541394480736,"frozenset({'chocolate', 'french fries'})"
+0.03372883615517931,"frozenset({'mineral water', 'french fries'})"
+0.03372883615517931,frozenset({'brownies'})
+0.03372883615517931,"frozenset({'mineral water', 'pancakes'})"
+0.03332888948140248,frozenset({'avocado'})
+0.03319557392347687,"frozenset({'eggs', 'chocolate'})"
+0.03239568057592321,frozenset({'hot dogs'})
+0.03212904946007199,"frozenset({'milk', 'chocolate'})"
+0.03186241834422077,frozenset({'cottage cheese'})
+0.03106252499666711,"frozenset({'mineral water', 'green tea'})"
+0.03079589388081589,"frozenset({'eggs', 'milk'})"
+0.030395947207039063,frozenset({'tomato juice'})
+0.030129316091187842,frozenset({'butter'})
+0.029462738301559793,frozenset({'whole wheat pasta'})
+0.02879616051193174,"frozenset({'burgers', 'eggs'})"
+0.028529529396080524,"frozenset({'green tea', 'french fries'})"
+0.028129582722303693,frozenset({'red wine'})
+0.027862951606452472,"frozenset({'spaghetti', 'frozen vegetables'})"
+0.027596320490601255,"frozenset({'spaghetti', 'french fries'})"
+0.027596320490601255,"frozenset({'olive oil', 'mineral water'})"
+0.027463004932675644,"frozenset({'cake', 'mineral water'})"
+0.027329689374750034,frozenset({'yogurt cake'})
+0.027196373816824423,frozenset({'light mayo'})
+0.027063058258898813,frozenset({'energy bar'})
+0.026663111585121985,frozenset({'energy drink'})
+0.026529796027196375,frozenset({'pepper'})
+0.026529796027196375,frozenset({'ham'})
+0.026529796027196375,"frozenset({'spaghetti', 'green tea'})"
+0.025729902679642713,frozenset({'vegetables mix'})
+0.025729902679642713,frozenset({'cereals'})
+0.025463271563791495,"frozenset({'eggs', 'green tea'})"
+0.025196640447940274,"frozenset({'spaghetti', 'pancakes'})"
+0.024396747100386616,"frozenset({'burgers', 'mineral water'})"
+0.024396747100386616,"frozenset({'mineral water', 'tomatoes'})"
+0.024130115984535395,frozenset({'muffins'})
+0.023996800426609784,"frozenset({'low fat yogurt', 'mineral water'})"
+0.023730169310758567,"frozenset({'milk', 'french fries'})"
+0.023596853752832957,"frozenset({'milk', 'frozen vegetables'})"
+0.023596853752832957,"frozenset({'mineral water', 'shrimp'})"
+0.023463538194907346,"frozenset({'chocolate', 'green tea'})"
+0.023063591521130515,"frozenset({'soup', 'mineral water'})"
+0.023063591521130515,frozenset({'oil'})
+0.023063591521130515,"frozenset({'ground beef', 'chocolate'})"
+0.022930275963204905,"frozenset({'olive oil', 'spaghetti'})"
+0.022930275963204905,"frozenset({'chocolate', 'frozen vegetables'})"
+0.022796960405279298,"frozenset({'chicken', 'mineral water'})"
+0.022530329289428077,frozenset({'french wine'})
+0.022263698173576856,frozenset({'fresh tuna'})
+0.021997067057725635,"frozenset({'ground beef', 'milk'})"
+0.021997067057725635,"frozenset({'burgers', 'french fries'})"
+0.021730435941874418,"frozenset({'eggs', 'pancakes'})"
+0.021730435941874418,"frozenset({'eggs', 'frozen vegetables'})"
+0.021463804826023197,"frozenset({'burgers', 'spaghetti'})"
+0.021330489268097587,frozenset({'strawberries'})
+0.021197173710171976,"frozenset({'spaghetti', 'shrimp'})"
+0.020930542594320756,"frozenset({'spaghetti', 'tomatoes'})"
+0.020930542594320756,frozenset({'meatballs'})
+0.020397280362618318,frozenset({'almonds'})
+0.020263964804692707,"frozenset({'frozen smoothie', 'mineral water'})"
+0.020130649246767097,"frozenset({'whole wheat rice', 'mineral water'})"
+0.020130649246767097,"frozenset({'pancakes', 'french fries'})"
+0.020130649246767097,"frozenset({'cooking oil', 'mineral water'})"

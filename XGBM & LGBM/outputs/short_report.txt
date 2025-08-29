@@ -1,0 +1,30 @@
+
+Titanic - LightGBM vs XGBoost
+============================
+Objective:
+Compare LightGBM and XGBoost on the Titanic dataset.
+
+Data:
+Train shape: (891, 12)
+Test shape: (418, 11)
+
+Feature engineering:
+- Title, FamilySize, IsAlone, TicketPrefix, CabinKnown
+- Imputed numeric with median, categorical with mode, One-Hot encoding for categories
+
+Best CV scores:
+- XGBoost CV (best): 0.8301
+- LightGBM CV (best): 0.8315
+
+Hold-out test metrics:
+| model    |   accuracy |   precision |   recall |       f1 |   roc_auc |
+|:---------|-----------:|------------:|---------:|---------:|----------:|
+| XGBoost  |   0.815642 |    0.810345 | 0.681159 | 0.740157 |  0.841897 |
+| LightGBM |   0.821229 |    0.784615 | 0.73913  | 0.761194 |  0.826943 |
+
+Artifacts saved in folder: outputs
+- metrics_compare.csv, model_comparison.png, confusion_xgb.png, confusion_lgbm.png, roc_xgb.png, roc_lgbm.png
+- xgb_submission.csv, lgb_submission.csv
+
+Conclusion:
+(Write your interpretation here: which model performed better on chosen metrics, notes on precision vs recall trade-offs, suggestions for improvements.)
